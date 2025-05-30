@@ -1,4 +1,4 @@
-// 1832C
+// 1715B
 
 #include <iostream>
 #include <vector>
@@ -34,36 +34,30 @@ typedef pair<ll, ll> pll;
 #define debug(x)
 #endif
 
-void solve(vll& a, int n) {
-  if (n == 1) {
-    cout << 1 << endl;
+void solve(int n, ll k, ll b, ll s) {
+  ll covered = k * b;
+  ll remaining = s - covered;
+  ll coverable = n * (k - 1);
+
+  if (remaining < 0 || remaining > coverable) {
+    cout << -1 << endl;
     return;
   }
 
-  int length = 1;
-  int inc = 0;
-  if (a[1] > a[0]) inc = 1;
-  else if (a[1] < a[0]) inc = -1;
+  vll a(n);
+  frange(i, 0, n) a[i] = b / n;
+  frange(i, 0, b % n) a[i]++;
+  frange(i, 0, n) a[i] *= k;
+  int cur = 0, idx = 0;
 
-  frange(i, 1, n) {
-    if ((inc >= 0 && a[i] >= a[i-1]) || (inc <= 0 && a[i] <= a[i-1])) {
-      if (inc == 0) {
-        if (a[i] > a[i-1]) inc = 1;
-        else if (a[i] < a[i-1]) inc = -1;
-      }
-      continue;
-    }
-    if (a[i] < a[i-1]) {
-      length++;
-      inc = -1;
-    } else {
-      length++;
-      inc = 1;
-    }
+  while (remaining > 0) {
+    cur = min(k-1, remaining);
+    a[idx] += cur;
+    idx++;
+    remaining -= cur;
   }
 
-  if (inc != 0) length++;
-  cout << length << endl;
+  print_vec(a);
 }
 
 int main() {
@@ -73,12 +67,11 @@ int main() {
 
   while (t--) {
     int n;
-    cin >> n;
+    ll k, b, s;
 
-    vll a(n);
-    frange(i, 0, n) cin >> a[i];
+    cin >> n >> k >> b >> s;
 
-    solve(a, n);
+    solve(n, k, b, s);
   }
 
   return 0;

@@ -1,4 +1,4 @@
-// 1832C
+// 1726A
 
 #include <iostream>
 #include <vector>
@@ -27,43 +27,34 @@ typedef pair<ll, ll> pll;
 #define F first
 #define S second
 
-// Debug macro
+// Debug macro (disable before submission)
 #ifdef LOCAL
 #define debug(x) cerr << #x << ": " << x << '\n'
 #else
 #define debug(x)
 #endif
 
-void solve(vll& a, int n) {
+void solve(vi& a, int n) {
   if (n == 1) {
-    cout << 1 << endl;
+    cout << 0 << endl;
     return;
   }
 
-  int length = 1;
-  int inc = 0;
-  if (a[1] > a[0]) inc = 1;
-  else if (a[1] < a[0]) inc = -1;
+  int ans = a[n-1] - a[0], cur_diff = 0;
+  int min_el = a[0], max_el = a[0];
 
   frange(i, 1, n) {
-    if ((inc >= 0 && a[i] >= a[i-1]) || (inc <= 0 && a[i] <= a[i-1])) {
-      if (inc == 0) {
-        if (a[i] > a[i-1]) inc = 1;
-        else if (a[i] < a[i-1]) inc = -1;
-      }
-      continue;
-    }
-    if (a[i] < a[i-1]) {
-      length++;
-      inc = -1;
-    } else {
-      length++;
-      inc = 1;
-    }
+    cur_diff = a[i-1] - a[i];
+    ans = max(ans, cur_diff);
+
+    min_el = min(min_el, a[i]);
+    max_el = max(max_el, a[i]);
   }
 
-  if (inc != 0) length++;
-  cout << length << endl;
+  ans = max(ans, max_el - a[0]);
+  ans = max(ans, a[n-1] - min_el);
+
+  cout << ans << endl;
 }
 
 int main() {
@@ -75,7 +66,7 @@ int main() {
     int n;
     cin >> n;
 
-    vll a(n);
+    vi a(n);
     frange(i, 0, n) cin >> a[i];
 
     solve(a, n);

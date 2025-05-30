@@ -1,4 +1,4 @@
-// 1832C
+// 1696B
 
 #include <iostream>
 #include <vector>
@@ -27,7 +27,7 @@ typedef pair<ll, ll> pll;
 #define F first
 #define S second
 
-// Debug macro
+// Debug macro (disable before submission)
 #ifdef LOCAL
 #define debug(x) cerr << #x << ": " << x << '\n'
 #else
@@ -35,35 +35,18 @@ typedef pair<ll, ll> pll;
 #endif
 
 void solve(vll& a, int n) {
-  if (n == 1) {
-    cout << 1 << endl;
-    return;
+  int count = 0;
+  int idx = 0;
+  while (idx < n) {
+    while (idx < n && a[idx] == 0) idx++;
+    if (idx == n) break;
+
+    while (idx < n && a[idx] != 0) idx++;
+    count++;
   }
 
-  int length = 1;
-  int inc = 0;
-  if (a[1] > a[0]) inc = 1;
-  else if (a[1] < a[0]) inc = -1;
-
-  frange(i, 1, n) {
-    if ((inc >= 0 && a[i] >= a[i-1]) || (inc <= 0 && a[i] <= a[i-1])) {
-      if (inc == 0) {
-        if (a[i] > a[i-1]) inc = 1;
-        else if (a[i] < a[i-1]) inc = -1;
-      }
-      continue;
-    }
-    if (a[i] < a[i-1]) {
-      length++;
-      inc = -1;
-    } else {
-      length++;
-      inc = 1;
-    }
-  }
-
-  if (inc != 0) length++;
-  cout << length << endl;
+  if (count > 2) count = 2;
+  cout << count << endl;
 }
 
 int main() {

@@ -1,4 +1,4 @@
-// 1832C
+// 1725B
 
 #include <iostream>
 #include <vector>
@@ -27,59 +27,45 @@ typedef pair<ll, ll> pll;
 #define F first
 #define S second
 
-// Debug macro
+// Debug macro (disable before submission)
 #ifdef LOCAL
 #define debug(x) cerr << #x << ": " << x << '\n'
 #else
 #define debug(x)
 #endif
 
-void solve(vll& a, int n) {
-  if (n == 1) {
-    cout << 1 << endl;
-    return;
+void solve(vll& p, int n, ll d) {
+  sort(all(p));
+
+  int teams = 0, left = 0, right = n-1;
+  int members = 0;
+  while (left <= right) {
+    members = d / p[right];
+    if (left + members <= right) {
+      teams++;
+      left = left + members;
+      right--;
+    } else break;
   }
 
-  int length = 1;
-  int inc = 0;
-  if (a[1] > a[0]) inc = 1;
-  else if (a[1] < a[0]) inc = -1;
-
-  frange(i, 1, n) {
-    if ((inc >= 0 && a[i] >= a[i-1]) || (inc <= 0 && a[i] <= a[i-1])) {
-      if (inc == 0) {
-        if (a[i] > a[i-1]) inc = 1;
-        else if (a[i] < a[i-1]) inc = -1;
-      }
-      continue;
-    }
-    if (a[i] < a[i-1]) {
-      length++;
-      inc = -1;
-    } else {
-      length++;
-      inc = 1;
-    }
-  }
-
-  if (inc != 0) length++;
-  cout << length << endl;
+  cout << teams << endl;
 }
 
 int main() {
   fast_io;
-  int t;
-  cin >> t;
+//   int t;
+//   cin >> t;
+// 
+//   while (t--) {
+  int n;
+  ll d;
+  cin >> n >> d;
 
-  while (t--) {
-    int n;
-    cin >> n;
-
-    vll a(n);
-    frange(i, 0, n) cin >> a[i];
-
-    solve(a, n);
-  }
+  vll p(n);
+  frange(i, 0, n) cin >> p[i];
+  
+  solve(p, n, d);
+//  }
 
   return 0;
 }
