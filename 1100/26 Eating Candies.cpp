@@ -1,4 +1,4 @@
-// 1285B
+// 1669F
 
 #include <iostream>
 #include <vector>
@@ -12,17 +12,20 @@ using namespace std;
 
 // Type definitions
 typedef long long ll;
+typedef long double ld;
 typedef vector<int> vi;
 typedef vector<ll> vll;
+typedef vector<ld> vld;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
+typedef pair<ld, ld> pld;
 
 // Macros
 #define fast_io ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 #define all(x) (x).begin(), (x).end()
 #define frange(i, a, b) for (ll i = (a); i < (b); ++i)
 #define frev(i, a, b) for (ll i = (a)-1; i >= (b); --i)
-#define print_vec(x) for (ll i = 0; i < (ll)x.size(); i++) cout << x[i] << " "; cout << endl
+#define print_vec(x) for (ll i = 0; i < (ll)(x).size(); i++) cout << (x)[i] << " "; cout << endl
 #define pb push_back
 #define F first
 #define S second
@@ -86,24 +89,21 @@ ll nPr(ll n, ll r) {
 
 void solve() {
   ll n; cin >> n;
-  ll el, min_idx = -1, min_sum = 0, total = 0, cur_sum = -MOD;
-  vll prefix(n+1, 0);
+  vll w(n), prefix(n+1, 0), postfix(n+1, 0);
   frange(i, 0, n) {
-    cin >> el;
-    total += el;
-    prefix[i+1] = total;
-    if (total <= min_sum) {
-      min_sum = total;
-      min_idx = i;
-    }
+    cin >> w[i];
+    prefix[i+1] = prefix[i] + w[i];
+  }
+  frev(i, n, 0) postfix[i] = postfix[i+1] + w[i];
 
-    if (!(i == n-1 && min_idx == -1)) cur_sum = max(cur_sum, total - min_sum);
+  ll total, left = 0, right = n;
+  while (left <= right) {
+    if (prefix[left] == postfix[right]) total = left++ + n - right--;
+    else if (prefix[left] < postfix[right]) left++;
+    else right--;
   }
 
-  frange(i, 1, n) cur_sum = max(cur_sum, prefix[n] - prefix[i]);
-
-  if (total > cur_sum) cout << "YES" << endl;
-  else cout << "NO" << endl;
+  cout << total << endl;
 }
 
 int main() {

@@ -1,4 +1,4 @@
-// 1285B
+// 1418A
 
 #include <iostream>
 #include <vector>
@@ -85,25 +85,8 @@ ll nPr(ll n, ll r) {
 }
 
 void solve() {
-  ll n; cin >> n;
-  ll el, min_idx = -1, min_sum = 0, total = 0, cur_sum = -MOD;
-  vll prefix(n+1, 0);
-  frange(i, 0, n) {
-    cin >> el;
-    total += el;
-    prefix[i+1] = total;
-    if (total <= min_sum) {
-      min_sum = total;
-      min_idx = i;
-    }
-
-    if (!(i == n-1 && min_idx == -1)) cur_sum = max(cur_sum, total - min_sum);
-  }
-
-  frange(i, 1, n) cur_sum = max(cur_sum, prefix[n] - prefix[i]);
-
-  if (total > cur_sum) cout << "YES" << endl;
-  else cout << "NO" << endl;
+  ll x, y, k; cin >> x >> y >> k;
+  cout << (k * (y+1) - 1 + x - 2) / (x-1) + k << endl;;
 }
 
 int main() {

@@ -1,6 +1,6 @@
 # Usage: make FILE=path/to/file.cpp
 
-CXX = g++
+CXX = g++-15
 CXXFLAGS = -DLOCAL -std=c++20
 
 all:
