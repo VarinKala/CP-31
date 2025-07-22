@@ -126,7 +126,6 @@ void solve() {
 
   ll n = s.size(), cur = 0;
   vll gaps;
-  debug(n);
   frange(i, 0, n) {
     if (s[i] == 'a') cur++;
     else if (s[i] == 'b') {
