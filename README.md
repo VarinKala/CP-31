@@ -1,5 +1,5 @@
 # CP-31
-TLE Eliminators' CP-31 Sheet solved by me
+TLE Eliminators' CP-31 Sheet Solutions
 
 ## Use makefile to compile a file
 - Compile: make FILE=path/to/file.cpp
