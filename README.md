@@ -2,8 +2,8 @@
 TLE Eliminators' CP-31 Sheet Solutions
 
 ## Use makefile to compile a file
-- To compile: make FILE=path/to/file.cpp
-- To run: ./a.out
+- To Compile: make FILE=path/to/file.cpp
+- To Run: ./a.out
 
 Over 225 accepted solutions to the [CP-31 Problem Set](www.tle-eliminators.com/cp-sheet), written in C++ by Varin Kala [(Codeforces)](codeforces.com/profile/VarinKala). As of `2025-07-26`, the following number of solutions have been completed:
 
