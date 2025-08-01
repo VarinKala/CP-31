@@ -17,8 +17,9 @@ Over 225 accepted solutions to the [CP-31 Problem Set](www.tle-eliminators.com/c
 |     1300     |     28/31     |
 |     1400     |     28/31     |
 |     1500     |     28/31     |
-|     1600     |      4/31     |
+|     1600     |      5/31     |
 |     1700     |      0/31     |
 |     1800     |      0/31     |
 |     1900     |      0/31     |
-|  **Total**   |  **228/372**  |
+|  **Total**   |  **229/372**  |
+
