@@ -1,4 +1,4 @@
-# CP-31 Sheet
+# CP-31
 TLE Eliminators' CP-31 Sheet Solutions
 
 ## Use makefile to compile a file
